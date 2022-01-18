@@ -29,7 +29,21 @@ def valueFromSatDistMapStatic(x, y):
     return distance_map[ix_coor.astype(int)][iy_coor.astype(int)]
 
 
-'''------ 4 --------'''
+'''------ 4 --------
+Collision checking:
+
+Starting at the very rear of the car, i.e. r = - rearBumperRearAxle
+
+(1) calculate d: the distance from the nearest obstacle to the collision checking radius
+ 
+if d < 0, there is a collision, and we end the calculation
+
+Increment r with max(vehicleHalfWidth, d), since a smaller resolution does not yield new information
+
+Repeat step (1) until either a collision is detected, or r is no longer inside the vehicle
+
+'''
+
 def checkForCollision(vehicleState, collisionCheckingRadius, vehicleHalfWidth, rearAxleFrontBumper, rearBumperRearAxle):
     EPSILON = 0.1
 
