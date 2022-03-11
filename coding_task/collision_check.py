@@ -5,7 +5,7 @@ collisionCheckingRadius = 1.78
 vehicleHalfWidth = 1.38
 rearAxleFrontBumper = 8.765
 rearBumperRearAxle = 3.405
-distance_map = np.genfromtxt('EECS_Degree_Project\coding_task\maps\distance_map_1.txt')
+distance_map = np.load('EECS_Degree_Project/coding_task/maps/distance_map_1.npy')
 
 plt.imshow(distance_map, cmap='cividis')
 plt.show()
