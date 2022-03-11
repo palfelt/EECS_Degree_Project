@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.spatial import cKDTree as KDTree
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-import sys
-print(sys.path)
 
-envmap = np.genfromtxt('EECS_Degree_Project\coding_task\maps\scene_map.txt')
+import sys
+sys.path.append('/home/oscar_palfelt/MSc_thesis/ompl/py-bindings')
+
+envmap = np.genfromtxt('EECS_Degree_Project/coding_task/maps/scene_map.txt')
 
 ix = np.arange(envmap.shape[0])
 iy = np.arange(envmap.shape[1])
@@ -40,12 +41,15 @@ plt.show()
 '''------ 3 --------'''
 def get_distance_map(mapval):
     value_indicies = np.argwhere(envmap==mapval)
+    print("yo")
+    print(value_indicies.shape)
     value_indicies_tree = KDTree(value_indicies)
     d, _ = value_indicies_tree.query(envmap_coor, distance_upper_bound=5)
     d = d.reshape(envmap.shape)
     d = np.where(d >= 5, 5, d)
     # return d¨
-    np.save(f'EECS_Degree_Project\coding_task\maps\distance_map_{mapval}.npy', d)
+    np.save(f'EECS_Degree_Project/coding_task/maps/distance_map_{mapval}', d)
+    np.save()
 
 def main():
     values = list(range(7))
